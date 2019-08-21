@@ -37,8 +37,8 @@ ignored = ['.bzr', '$RECYCLE.BIN', '.DAV', '.DS_Store', '.git', '.hg', '.htacces
 datatypes = {'audio': 'm4a,mp3,oga,ogg,webma,wav', 'archive': '7z,zip,rar,gz,tar', 'image': 'gif,ico,jpe,jpeg,jpg,png,svg,webp', 'pdf': 'pdf', 'quicktime': '3g2,3gp,3gp2,3gpp,mov,qt', 'source': 'atom,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml,plist', 'text': 'txt', 'video': 'mp4,m4v,ogv,webm', 'website': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
 icontypes = {'fa-music': 'm4a,mp3,oga,ogg,webma,wav', 'fa-archive': '7z,zip,rar,gz,tar', 'fa-picture-o': 'gif,ico,jpe,jpeg,jpg,png,svg,webp', 'fa-file-text': 'pdf', 'fa-film': '3g2,3gp,3gp2,3gpp,mov,qt', 'fa-code': 'atom,plist,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml', 'fa-file-text-o': 'txt', 'fa-film': 'mp4,m4v,ogv,webm', 'fa-globe': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
 
-app.config['BASIC_AUTH_USERNAME'] = 'clive'
-app.config['BASIC_AUTH_PASSWORD'] = 'clive'
+app.config['BASIC_AUTH_USERNAME'] = 'admin'
+app.config['BASIC_AUTH_PASSWORD'] = 'admin'
 basic_auth = BasicAuth(app)
 
 ##LPIC DOC
@@ -98,8 +98,6 @@ def index():
     return render_template('index2.html', photos=photos)
 
 def read_photos():
-    # You can update this dictionary by change the attributes in 'data.json' file. An example of one row is given below
-    #[{u'artist': u'John Smith', u'price': u'$250', u'title': u'img 001', u'source': u'../static/img/img.jpg', u'year': u'2012', u'desc': u'description'}]
     with open('data/data.json', 'r') as file:
         data = json.load(file,)
     return data
@@ -109,7 +107,6 @@ def collectionItem(objectID):
 
     # Dynamically route url to the photo that was selected.
     # This example opens new page and displays the photo with its information
-
     with open('data/data.json', 'r') as file:
         data = json.load(file)
 
@@ -406,21 +403,8 @@ def python11():
 
 
 
-
-
-
-
-
-
-
-
-
-
-#File Server 
-
-
 if __name__ == '__main__':
-    bind = os.getenv('FS_BIND', '192.168.0.11', )
+    bind = os.getenv('FS_BIND', '127.0.0.1', )
     port = os.getenv('FS_PORT', 8080)
     root = os.path.normpath(os.getenv('FS_PATH', r'/media/clive/Webapp/flask-file-server-4-hosting\ftpdata'))
     key = os.getenv('FS_KEY')
