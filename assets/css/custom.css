@@ -1,0 +1,19 @@
+.session {
+    float:right;
+    margin: 5px 10px 0 0;
+}
+
+.login {
+    float:right
+}
+
+.maintitle {
+    font-size: 40px;
+    color:#a7e8ff;
+    font-family: Helvetica;
+    display: flex;
+    align-items: center;
+    justify-content: center
+
+}
+

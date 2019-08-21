@@ -1,0 +1,66 @@
+<!doctype html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>BMI Calculator</title>
+	
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='clive.css') }}">
+
+</head>
+
+
+<body>
+
+		<title>Clive Micallef Calculators</title>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/listr.pack.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.filer.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/clive.css')}}">
+	  
+	  </head>
+	  
+	   <!---Title-->
+	   <!---Tile End-->
+	  
+	   <body>
+		<header class="site-header">
+		  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+			<div class="topnav">
+			   <!---Title-->
+			  <div class="maintitle">Clive Micallef Calculators</div>
+			   <!---Tile End-->
+	  
+	  
+			  <a class="nav-item nav-link" href="/home">Home Page</a>
+			  <a class="active" href="/clive">Clive</a>
+			  <a class="nav-item nav-link" href="/">Clive Micallef's Notes</a>
+			</div>
+		  </nav>
+		</header>
+	   </body>
+
+<div class="main">
+	<form class="pure-form" method="POST" action="/">
+	Weight in kgs:<br>
+	<input type="text" name="weight"><br>
+	Height in cms:<br>
+	<input type="text" name="height"><br>
+	<button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
+	</form>
+</div>
+
+<br>
+
+<div class="main">
+	{% if bmi %}
+	    <p>
+        {% print("Your BMI is {}.".format(bmi)) %}
+        </p>
+	{% endif %}
+</div>
+
+</body>
