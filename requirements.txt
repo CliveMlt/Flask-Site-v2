@@ -3,18 +3,8 @@ humanize
 pathlib2
 werkzeug
 datetime
-os
-re
-stat
-json
-mimetypes
-sys
-pathlib2
 flask_debug
-flask import
-passlib.hash
+passlib
 boto3
-json
 flask_sqlalchemy 
-sqlite3
 flask_basicauth
