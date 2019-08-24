@@ -25,6 +25,9 @@ app = Flask(__name__, static_url_path='/assets', static_folder='assets')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo2.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
 
 db = SQLAlchemy(app)
 key = "password"
@@ -109,7 +112,7 @@ def collectionItem(objectID):
 
     return render_template('index2.html')
 
-app.secret_key = sha256_crypt.encrypt("big secret")
+app.secret_key = sha256_crypt.hash("big secret")
 
 ##End Gallery
 
