@@ -2,7 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+	<link href="{{url_for('static', filename='css/flaskgallery.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='css/todoapp2.css')}}" rel="stylesheet">
+
+	<body id="page-top">
+		<!-- Navigation -->
+		<nav class="navbar" id="mainNav">
+		<div class="container">
+		  <a class="nav-item nav-link" href="/home">Home</a>
+		  <a class="nav-item nav-link" href="/clive">Clive</a>
+		  <a class="nav-item nav-link" href="/">Files</a>
+		  <a class="nav-item nav-link" href="/gallery">Gallery</a>
+		  <a class="nav-item nav-link" href="/calendar">Calendar</a>
+		  <a class="active" href="/indextodo2">To Do</a>
+		  <a class="nav-item nav-link" href="/bookshelf">Bookshelf</a>
+		</div>
+		</nav>
+</body>
+
+
+
 	{% block title %}
 	<title>TODO PY</title>
 	{% endblock %}
@@ -10,7 +29,7 @@
 <body>
 	<header>
 		<div class="container">
-			<h1><a href="/">TODO-PY</a></h1>
+			<h10>TODO-PY</h10>
 		</div>
 	</header>
 	<div class="container">

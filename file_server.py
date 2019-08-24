@@ -115,26 +115,26 @@ app.secret_key = sha256_crypt.encrypt("big secret")
 
 
 ## Todo App
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(200))
-    complete = db.Column(db.Boolean)
+# class Todo(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     text = db.Column(db.String(200))
+#     complete = db.Column(db.Boolean)
 
-@app.route('/todo')
-def todo():
-    incomplete = Todo.query.filter_by(complete=False).all()
-    complete = Todo.query.filter_by(complete=True).all()
+# @app.route('/todo')
+# def todo():
+#     incomplete = Todo.query.filter_by(complete=False).all()
+#     complete = Todo.query.filter_by(complete=True).all()
 
-    return render_template('todo.html', incomplete=incomplete, complete=complete)
+#     return render_template('todo.html', incomplete=incomplete, complete=complete)
 
-#Add
-@app.route('/add', methods=['POST'])
-def add():
-    todo = Todo(text=request.form['todoitem'], complete=False)
-    db.session.add(todo)
-    db.session.commit()
+# #Add
+# @app.route('/add', methods=['POST'])
+# def add():
+#     todo = Todo(text=request.form['todoitem'], complete=False)
+#     db.session.add(todo)
+#     db.session.commit()
 
-    return redirect(url_for('todo'))
+#     return redirect(url_for('todo'))
     
 #Complete
 # @app.route('/todo/complete/<id>')
