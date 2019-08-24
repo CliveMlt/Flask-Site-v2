@@ -111,81 +111,7 @@
 
 </style>
 
-<link href="{{ url_for('static', filename='sukeesh.css') }}" rel='stylesheet' />
-
-<!-- </head>
-<body>
-<div id="Yo">
-	<font color="#2bc493">
-
-	<div style="width: 100%;overflow: hidden; margin-top: 1px; margin-left: 2px;">
-		<font size="20" color="#007bff">
-		<div id="leftPanel" style="width: 200px; height: 660px; float: left; background-color: white; position: absolute;">
-			<br><br>
-				<div id="time" align="center" style="background-color: white;"></div>
-			<br><br>
-			<script type="text/javascript">
-				function checkTime(i) {
-				    if (i < 10) {
-				        i = "0" + i;
-				    }
-				    return i;
-				}
-
-				function startTime() {
-				    var today = new Date();
-				    var h = today.getHours();
-				    var m = today.getMinutes();
-				    var s = today.getSeconds();
-				    m = checkTime(m);
-				    s = checkTime(s);
-				    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
-				    t = setTimeout(function () {
-				        startTime()
-				    }, 500);
-				}
-				startTime();
-			</script>
-			</font>
-			<font color="##007bff"> <b> &nbsp; &nbsp; &nbsp; Weather</b> </font>
-			<font size="20" color="#007bff">
-			<div id="WeatherW" style="width: 199px; background-color: white;" >
-				<div id="theCloud" style="width: 20px; float: left;"><i class="fa fa-cloud" aria-hidden="true"></i></div>
-				<div id="show-weather" style="margin-left: 0px;"></div>
-			</div>
-
-			</font>
-			<br>
-
-			<font color="#007bff">
-				<b><div id="address" align="center" style="background-color: white;"></div></b>
-
-			<script type="text/javascript">
-				$.get("http://ipinfo.io", function (response) {
-				    $("#address").html(response.city + ", " + response.region);
-				}, "jsonp");
-
-				var callbackFunction = function(data) {
-				    var wind = data.query.results.channel.wind;
-				    document.getElementById("show-weather").innerHTML = Math.round((wind.chill - 32) / (9 / 5)) + "<sup>o</sup>C";
-				};
-			</script>
-			</font>
-			<br><br>
-			<div id='weather'>
-				<script src="https://query.yahooapis.com/v1/public/yql?q=select wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='Bangalore')&format=json&callback=callbackFunction"></script>
-			</div>
-
-			<div id='AddEvent' align="center"> <button type="button" onclick="func()"> Add Event </button> </div>
-			<script type="text/javascript">
-				function func(){
-					var r1 = prompt("Title : ", " Enter Title ");
-					var r2 = prompt("Start Date : ", "yyyy-mm-dd");
-					var r3 = prompt("End Date : ", "yyyy-mm-dd");
-				}
-			</script>
-		</div> -->
-
+<link href="{{ url_for('static', filename='calendar1.css') }}" rel='stylesheet' />
 		<div id="rightPanel" style="margin-left: 100px; margin-top: 0px;">
 			<div id='loading'>loading...</div>
 			<div id='calendar'></div>
@@ -193,7 +119,6 @@
 
 	</div>
 
-	</font>
 </div>
 </body>
 </html>
