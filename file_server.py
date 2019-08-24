@@ -21,21 +21,14 @@ from flask_basicauth import BasicAuth
 
 
 
-
-
 app = Flask(__name__, static_url_path='/assets', static_folder='assets')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo2.db'
 
 db = SQLAlchemy(app)
-
-root = os.path.normpath("/ftpdata")
 key = "password"
 
-ignored = ['.bzr', '$RECYCLE.BIN', '.DAV', '.DS_Store', '.git', '.hg', '.htaccess', '.htpasswd', '.Spotlight-V100', '.svn', '__MACOSX', 'ehthumbs.db', 'robots.txt', 'Thumbs.db', 'thumbs.tps']
-datatypes = {'audio': 'm4a,mp3,oga,ogg,webma,wav', 'archive': '7z,zip,rar,gz,tar', 'image': 'gif,ico,jpe,jpeg,jpg,png,svg,webp', 'pdf': 'pdf', 'quicktime': '3g2,3gp,3gp2,3gpp,mov,qt', 'source': 'atom,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml,plist', 'text': 'txt', 'video': 'mp4,m4v,ogv,webm', 'website': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
-icontypes = {'fa-music': 'm4a,mp3,oga,ogg,webma,wav', 'fa-archive': '7z,zip,rar,gz,tar', 'fa-picture-o': 'gif,ico,jpe,jpeg,jpg,png,svg,webp', 'fa-file-text': 'pdf', 'fa-film': '3g2,3gp,3gp2,3gpp,mov,qt', 'fa-code': 'atom,plist,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml', 'fa-file-text-o': 'txt', 'fa-film': 'mp4,m4v,ogv,webm', 'fa-globe': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
 
 app.config['BASIC_AUTH_USERNAME'] = 'admin'
 app.config['BASIC_AUTH_PASSWORD'] = 'admin'
@@ -134,6 +127,7 @@ def todo():
 
     return render_template('todo.html', incomplete=incomplete, complete=complete)
 
+#Add
 @app.route('/add', methods=['POST'])
 def add():
     todo = Todo(text=request.form['todoitem'], complete=False)
@@ -141,16 +135,119 @@ def add():
     db.session.commit()
 
     return redirect(url_for('todo'))
-
-@app.route('/todo/complete/<id>')
-def complete(id):
-
-    todo = Todo.query.filter_by(id=int(id)).first()
-    todo.complete = True
-    db.session.commit()
     
-    return redirect(url_for('todo'))
+#Complete
+# @app.route('/todo/complete/<id>')
+# def complete(id):
+
+#     todo = Todo.query.filter_by(id=int(id)).first()
+#     todo.complete = True
+#     db.session.commit()
+    
+#     return redirect(url_for('todo'))
 #Todo App End
+
+
+
+
+#Todo2
+# Home page
+@app.route('/indextodo2')
+def indextodo2():
+	all_tasks = Task.query.all()
+	return render_template('indextodo2.html', t = all_tasks)
+
+
+
+
+
+
+
+# Models
+class Task(db.Model):
+	__tablename__ = 'tasks'
+	idTask = db.Column('idTask', db.Integer, primary_key = True)
+	task = db.Column('task', db.String)
+	status = db.Column('status', db.String, default = 'uncomplete')
+	creation_date = db.Column('creation_date', db.DateTime, default = datetime.utcnow())
+
+	def __init__(self, task):
+		self.task = task
+
+# Create a new task
+@app.route('/task', methods=['POST'])
+def tasks():
+	new_task = Task(request.form['task'])
+	db.session.add(new_task)
+	db.session.commit()
+	return redirect('/indextodo2', 302)
+	
+# Read a specific task
+@app.route('/task/<id>', methods=['GET'])
+def getTask(id):
+	return id
+
+# Update a task
+@app.route('/updatetask/<taskID>', methods=['GET'])
+def updateTask(taskID):
+	the_task = Task.query.filter_by(idTask = taskID).first()
+
+	return render_template('update.html', task = the_task)
+
+@app.route('/do_updatetask', methods=['POST'])
+def do_updatetask():
+	update_task = Task.query.filter_by(idTask = request.form['taskID']).first()
+	update_task.task = request.form['task']
+	db.session.commit()
+
+	return redirect('/indextodo2', 302)
+
+# Delete a task
+@app.route('/deletetask/<taskID>', methods=['GET'])
+def deleteTask(taskID):
+	
+	delete_task = Task.query.filter_by(idTask=taskID).first()
+	db.session.delete(delete_task)
+	db.session.commit()
+
+	# redirect to homepage
+	return redirect('/indextodo2', 302)
+
+@app.route('/complete/<taskID>')
+def complete(taskID):
+
+	complete_task = Task.query.filter_by(idTask = taskID).first()
+	complete_task.status = 'complete'
+	db.session.commit()
+
+	# Redirect to the homepage
+	return redirect('/indextodo2', 302)
+
+@app.route('/uncomplete/<taskID>')
+def uncomplete(taskID):
+
+	uncomplete_task = Task.query.filter_by(idTask = taskID).first()
+	uncomplete_task.status = 'uncomplete'
+	db.session.commit()
+
+	# Redirect to the homepage
+	return redirect('/indextodo2', 302)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -381,18 +478,6 @@ def python10():
 def python11():
     return render_template('python11.html', title='Python')
 #End Python Books
-
-
-
-
-
-
-
-
-
-
-
-
 ##END BOOKS
 
 
@@ -404,8 +489,4 @@ def python11():
 
 
 if __name__ == '__main__':
-    bind = os.getenv('FS_BIND', '127.0.0.1', )
-    port = os.getenv('FS_PORT', 8080)
-    root = os.path.normpath(os.getenv('FS_PATH', r'/media/clive/Webapp/flask-file-server-4-hosting\ftpdata'))
-    key = os.getenv('FS_KEY')
-    app.run(bind, port, threaded=True, debug=False)
+    app.run(port=8080, threaded=True, debug=False)
