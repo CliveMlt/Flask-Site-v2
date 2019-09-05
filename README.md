@@ -50,7 +50,7 @@ flask run
 ## Gallery
 Gallery Data is stored in /data/data.json.
 ```
-`{
+	   `{
               "objectID": "CC01",
               "url": "https://...",
               "thumb": "https:/...",
